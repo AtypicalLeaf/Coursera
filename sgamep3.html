@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Play "The Matching Game" Now!</title>
+		<style>
+			
+			div{
+				position:absolute;
+				width:500px; 
+				height:500px
+			}
+			
+			img{
+				position:absolute;
+			}
+			
+			#rightSide{
+				left: 500px; 
+				border-left: 1px solid black;
+			}
+			
+		</style>
+	</head>
+	
+	<body onload="generateFaces();">
+	
+		<h1>Matching Game</h1>
+		<span>Click on the extra smiley face on the left</span>
+		
+		<div id="leftSide"></div>
+		<div id="rightSide"></div>
+		
+	</body>
+		<script type="text/javascript">			
+			
+			//Initial number of faces(images):
+			var numberOfFaces = 5;
+			
+			//Declaring rightSide and leftSide <div>'s as DOM-variables:
+			var theRightSide= document.getElementById("rightSide");
+			var theLeftSide =
+				document.getElementById("leftSide");
+				
+			//Declaring the main "body"-tag as a variable:
+			var theBody =
+				document.getElementsByTagName("body")[0];
+			
+			//Generating images and putting them on screen:
+			function generateFaces(){
+			
+				//Creating a smiley-face img var to add to the page:	
+				var myImg = document.createElement("img");
+				myImg.src="http://home.cse.ust.hk/~rossiter/mooc/matching_game/smile.png";
+
+				//Looping to append faces to leftSideDiv:
+				for(var i = 1; i <= numberOfFaces; i++){
+				
+				//Here we are cloning the img-var "myImg" to theLeftSide-div, updating with random px-coordinates each iteration:
+					myImg.style.top = getRandomPosition() + "px";
+					myImg.style.left = getRandomPosition()+ "px";
+					
+				//This statement appends a clone of the updated child element "myImg" to the leftSide div:					
+					theLeftSide.appendChild(myImg.cloneNode(true));
+				}
+			
+				//This function is cloning the children("<img>"s) of "leftSide-div" to "rightSide-div":
+				cloneToRight(theLeftSide.cloneNode(true));
+				
+			}
+
+			//Returns random px-value for image-coordinates:
+			function getRandomPosition(){
+				return  40 * Math.floor(Math.random() * 11);
+			}
+			
+			//Appends all the children from the var in the arguments, except for the last child:	
+			function cloneToRight(imgs){
+			
+				imgs.removeChild(imgs.lastChild);
+				theRightSide.appendChild(imgs);
+			
+			}
+			
+		</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
